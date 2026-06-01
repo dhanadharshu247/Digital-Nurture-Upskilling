@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Event Portal</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <nav>
+        <h2>EventHub</h2>
+
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1>Discover Amazing Community Events</h1>
+        <p>Workshops, Music Shows, Sports and More</p>
+        <button onclick="scrollToEvents()">Explore Events</button>
+    </div>
+</section>
+
+<section id="events">
+    <h2 class="section-title">Upcoming Events</h2>
+
+    <div class="filter">
+        <select id="categoryFilter" onchange="filterEvents()">
+            <option value="all">All Categories</option>
+            <option value="music">Music</option>
+            <option value="sports">Sports</option>
+            <option value="workshop">Workshop</option>
+        </select>
+    </div>
+
+    <div class="event-container" id="eventContainer"></div>
+</section>
+
+<section id="gallery">
+    <h2 class="section-title">Gallery</h2>
+
+    <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f" alt="">
+        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865" alt="">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" alt="">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac" alt="">
+        <img src="https://images.unsplash.com/photo-1515169067868-5387ec356754" alt="">
+        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30" alt="">
+    </div>
+</section>
+
+<section class="register-section">
+    <h2 class="section-title">Register Now</h2>
+
+    <form id="registrationForm">
+
+        <input type="text" id="name" placeholder="Full Name" required>
+
+        <input type="email" id="email" placeholder="Email Address" required>
+
+        <select id="eventType" required>
+            <option value="">Select Event</option>
+            <option>Music Festival</option>
+            <option>Football Match</option>
+            <option>Coding Workshop</option>
+        </select>
+
+        <textarea id="message" placeholder="Message"></textarea>
+
+        <button type="submit">Register</button>
+
+        <p id="successMsg"></p>
+
+    </form>
+</section>
+
+<section class="location">
+    <h2 class="section-title">Find Nearby Events</h2>
+
+    <button onclick="findLocation()">Get My Location</button>
+
+    <p id="locationResult"></p>
+</section>
+
+<footer id="contact">
+    <h3>EventHub</h3>
+    <p>Email: support@eventhub.com</p>
+    <p>Phone: +91 9876543210</p>
+</footer>
+
+<script src="main.js"></script>
+
+</body>
+</html>
