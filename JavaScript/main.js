@@ -1,132 +1,139 @@
-console.log("Community Portal Loaded");
-
 const events = [
 
 {
-name:"Music Festival",
+title:"Music Festival",
 category:"music",
-image:"https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f"
+description:"Live music performances from top artists."
 },
 
 {
-name:"Football Match",
+title:"Football Match",
 category:"sports",
-image:"https://images.unsplash.com/photo-1574629810360-7efbbe195018"
+description:"Inter-city football championship."
 },
 
 {
-name:"Coding Workshop",
+title:"Coding Workshop",
 category:"workshop",
-image:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3"
+description:"Learn Web Development from experts."
 }
 
 ];
 
-const container =
+const eventContainer =
 document.getElementById("eventContainer");
 
-function displayEvents(list){
+function displayEvents(category="all"){
 
-container.innerHTML="";
+eventContainer.innerHTML="";
 
-list.forEach(event=>{
+const filtered = category==="all"
+? events
+: events.filter(event =>
+event.category===category);
 
-container.innerHTML += `
-<div class="event-card">
+filtered.forEach(event=>{
 
-<img src="${event.image}">
+const card=document.createElement("div");
 
-<div class="event-card-content">
+card.classList.add("event-card");
 
-<h3>${event.name}</h3>
-
-<p>Join our exciting ${event.category} event.</p>
-
-<button onclick="registerEvent('${event.name}')">
-Register
-</button>
-
-</div>
-
-</div>
+card.innerHTML=`
+<h3>${event.title}</h3>
+<p>${event.description}</p>
 `;
 
+card.addEventListener("click",()=>{
+
+document.getElementById("modalTitle")
+.innerHTML=event.title;
+
+document.getElementById("modalDescription")
+.innerHTML=event.description;
+
+document.getElementById("eventModal")
+.style.display="block";
+
+});
+
+eventContainer.appendChild(card);
+
 });
 
 }
 
-displayEvents(events);
-
-function filterEvents(){
-
-const category =
-document.getElementById("categoryFilter").value;
-
-if(category==="all"){
-displayEvents(events);
-}
-else{
-displayEvents(
-events.filter(
-e=>e.category===category
-)
-);
-}
-
-}
-
-function registerEvent(name){
-
-alert(
-"You registered for " + name
-);
-
-}
+displayEvents();
 
 document
-.getElementById("registrationForm")
-.addEventListener("submit",
+.getElementById("categoryFilter")
+.addEventListener("change",(e)=>{
 
-function(e){
-
-e.preventDefault();
-
-document.getElementById("successMsg")
-.innerHTML =
-"Registration Successful ✓";
+displayEvents(e.target.value);
 
 });
 
-function findLocation(){
+document.querySelector(".close")
+.addEventListener("click",()=>{
 
-if(navigator.geolocation){
+document.getElementById("eventModal")
+.style.display="none";
 
-navigator.geolocation.getCurrentPosition(
-
-function(position){
-
-document.getElementById("locationResult")
-.innerHTML =
-`Latitude:
-${position.coords.latitude}
-<br>
-Longitude:
-${position.coords.longitude}`;
-
-}
-
-);
-
-}
-
-}
+});
 
 function scrollToEvents(){
 
 document
 .getElementById("events")
-.scrollIntoView({
-behavior:"smooth"
+.scrollIntoView({behavior:"smooth"});
+
+}
+
+function findLocation(){
+
+if(navigator.geolocation){
+
+navigator.geolocation.getCurrentPosition(position=>{
+
+document.getElementById("locationResult")
+.innerHTML=
+`Latitude: ${position.coords.latitude}
+<br>
+Longitude: ${position.coords.longitude}`;
+
 });
 
 }
+
+}
+
+const eventDate =
+new Date("December 31, 2026 18:00:00")
+.getTime();
+
+setInterval(()=>{
+
+const now=new Date().getTime();
+
+const distance=eventDate-now;
+
+const days=Math.floor(
+distance/(1000*60*60*24)
+);
+
+const hours=Math.floor(
+(distance%(1000*60*60*24))
+/
+(1000*60*60)
+);
+
+const mins=Math.floor(
+(distance%(1000*60*60))
+/
+(1000*60)
+);
+
+document.getElementById("timer")
+.innerHTML=
+`${days} Days ${hours} Hours ${mins} Minutes`;
+
+},1000);

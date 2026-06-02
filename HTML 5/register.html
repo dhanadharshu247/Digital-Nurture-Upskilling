@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Register Event</title>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<section class="register-page">
+
+<h1>Register For Event</h1>
+
+<form id="registrationForm">
+
+<input type="text" id="name" placeholder="Full Name" required>
+
+<input type="email" id="email" placeholder="Email Address" required>
+
+<select id="event">
+
+<option>Select Event</option>
+<option>Music Festival</option>
+<option>Football Match</option>
+<option>Coding Workshop</option>
+
+</select>
+
+<textarea placeholder="Message"></textarea>
+
+<button type="submit">Register</button>
+
+<p id="successMessage"></p>
+
+</form>
+
+</section>
+
+<script>
+
+document
+.getElementById("registrationForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+document.getElementById("successMessage")
+.innerHTML="Registration Successful!";
+
+});
+
+</script>
+
+</body>
+</html>
